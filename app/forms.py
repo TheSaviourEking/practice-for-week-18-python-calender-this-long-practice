@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
@@ -7,11 +8,12 @@ from wtforms import (
     BooleanField,
     SubmitField,
 )
-from wtforms.validators import DataRequired
-from datetime import datetime
+from wtforms.validators import DataRequired, ValidationError
 
 
 class AppointmentForm(FlaskForm):
+    """The Appointment Form class"""
+
     name = StringField("Name", validators=[DataRequired()])
     start_date = DateField("Start Date", validators=[DataRequired()])
     start_time = TimeField("Start Time", validators=[DataRequired()])
@@ -20,3 +22,14 @@ class AppointmentForm(FlaskForm):
     description = TextAreaField("Description", validators=[DataRequired()])
     private = BooleanField("Private Event ?")
     submit = SubmitField("Create an appointment")
+
+    def validate_end_date(self, field):
+        """Validating end time"""
+        start = datetime.combine(self.start_date.data, self.start_time.data)
+        end = datetime.combine(field.data, self.end_time.data)
+        if start >= end:
+            msg = "End date/time must come after start date/time"
+            raise ValidationError(msg)
+
+        if self.start_date.data != self.end_date.data:
+            raise ValidationError("Start and end date must be the same day")
