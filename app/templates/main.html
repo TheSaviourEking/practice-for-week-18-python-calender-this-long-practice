@@ -10,6 +10,39 @@
 
 <body>
     <h1>Calender Working</h1>
+    <form action="/" method="POST">
+        {{form.csrf_token}}
+        <div>
+            {{form.name.label}}
+            {{form.name(size=32)}}
+        </div>
+        <div>
+            {{form.start_date.label}}
+            {{form.start_date(size=32)}}
+
+            {{form.start_time.label}}
+            {{form.start_time(size=32)}}
+        </div>
+        <div>
+            {{form.end_date.label}}
+            {{form.end_date(size=32)}}
+
+            {{form.end_time.label}}
+            {{form.end_time(size=32)}}
+        </div>
+        <div>
+            {{form.description.label}}
+            {{form.description(size=32)}}
+        </div>
+        <div>
+            {{form.private.label}}
+            {{form.private(size=32)}}
+        </div>
+        <button type="submit">
+            {{form.submit.label}}
+        </button>
+    </form>
+
     <table>
         <thead>
             <tr>
@@ -29,6 +62,7 @@
             {% endfor %}
         </tbody>
     </table>
+
 </body>
 
 </html>
