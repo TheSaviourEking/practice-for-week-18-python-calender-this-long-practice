@@ -1,8 +1,8 @@
 from os import environ
+from datetime import datetime, timedelta
 import psycopg2
-from flask import Blueprint, render_template, redirect, request, flash
+from flask import Blueprint, render_template, redirect, url_for
 from .forms import AppointmentForm
-from datetime import datetime
 
 CONNECTION_PARAMETERS = {
     "user": environ.get("DB_USER"),
@@ -19,6 +19,14 @@ def main():
     """
     docstring to clear this error
     """
+    date = datetime.now()
+    # print(date.year)
+    return redirect(url_for(".daily", year=date.year, month=date.month, day=date.day))
+
+
+@bp.route("/<int:year>/<int:month>/<int:day>/", methods=["GET", "POST"])
+def daily(year, month, day):
+    """Get daily appointment"""
     form = AppointmentForm()
 
     if form.validate_on_submit():
@@ -57,16 +65,26 @@ def main():
                         "private": form.private.data,
                     },
                 )
-                
+
                 return redirect("/")
 
     with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
+
+        day = datetime(year, month, day)
+        next_day = day + timedelta(days=1)
+
         with conn.cursor() as curs:
             curs.execute(
                 """
-                    SELECT id, name, start_datetime, end_datetime FROM appointments
-                    ORDER BY start_datetime
-                """
+                    SELECT id, name, start_datetime, end_datetime
+                    FROM appointments
+                    WHERE start_datetime BETWEEN %(day)s AND %(next_day)s
+                    ORDER BY start_datetime;
+                """,
+                {
+                    "day": day,
+                    "next_day": next_day,
+                },
             )
 
             rows = curs.fetchall()
