@@ -20,7 +20,6 @@ def main():
     docstring to clear this error
     """
     date = datetime.now()
-    # print(date.year)
     return redirect(url_for(".daily", year=date.year, month=date.month, day=date.day))
 
 
