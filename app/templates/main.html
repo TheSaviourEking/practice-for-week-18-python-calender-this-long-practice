@@ -3,119 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- <meta http-equiv="refresh" content="10"> -->
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <!-- <link rel="stylesheet" href="/static/css/styles.css"> -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+
 </head>
 
 <body>
     <h1>Calender Working</h1>
-    <form action="" method="POST">
-        {{form.csrf_token}}
-        <div>
-            {{form.name.label}}
-            {{form.name(size=32)}}
-        </div>
-        <div>
-            {{form.start_date.label}}
-            {{form.start_date(size=32)}}
-
-            {{form.start_time.label}}
-            {{form.start_time(size=32)}}
-        </div>
-        <!-- <div>
-            {{form.end_date.label}}
-            {{form.end_date(size=32)}}
-
-            {{form.end_time.label}}
-            {{form.end_time(size=32)}}
-        </div> -->
-        <div>
-            {{form.end_date.label}}
-            {{form.end_date}}
-
-            {{form.end_time.label}}
-            {{form.end_time(size=32)}}
-
-            {% if form.end_date.errors %}
-            <ul class="errors">
-                {% for error in form.end_date.errors %}
-                <li>{{error}}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
-        <div>
-            {{form.description.label}}
-            {{form.description(size=32)}}
-        </div>
-        <div>
-            {{form.private.label}}
-            {{form.private(size=32)}}
-        </div>
-        <button type="submit">
-            {{form.submit.label}}
-        </button>
-    </form>
-
-    <!-- New Section for changing Date with Dropdowns -->
-    <h2>Change Date</h2>
-    <div class="date-wrapper">
-        <div>
-            <label for="change-date">Select Date:</label>
-            <input type="date" id="change-date">
-        </div>
-
-        <div>
-            <form id="date-change-form" action="" method="POST">
-                <div>
-                    <label for="change-year">Year:</label>
-                    <select id="change-year">
-                        
-                    </select>
-                </div>
-                <div>
-                    <label for="change-month">Month:</label>
-                    <select name="change-month" id="change-month">
-                        <option value="Disabled" disabled selected>Select a Month</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="change-day">Day:</label>
-                    <select id="change-day">
-                        <option value="Disabled" disabled selected aria-selected="">Select a day</option>
-                    </select>
-                </div>
-
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- TABLE -->
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Start</th>
-                <th>End</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for row in rows %}
-            <tr>
-                <td>{{row[1]}}</td>
-                <td>{{row[2].strftime("%H:%M")}}</td>
-                <td>{{row[3].strftime("%H:%M")}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% include 'change_date.html' %}
+    {% include 'calendar_view.html' %}
 
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>

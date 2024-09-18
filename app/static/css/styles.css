@@ -1,18 +1,105 @@
 *,
 *::before,
 *::after {
-    transition: all 3s ease-in-out;
+    /* transition: all 3s ease-in-out; */
     /* margin: 0;
     padding: 0; */
 }
 
 body {
+    /* background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 50%, #f4d03f 100%); */
+    /* height: 100vh; */
+}
+
+body,
+form,
+table {
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 .date-wrapper {
+    width: 100%;
+    justify-content: space-around;
+    text-align: center;
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 2rem;
+}
+
+table {
+    width: 100%;
+}
+
+input,
+textarea {
+    background: linear-gradient(to right, #e0eafc 0%, #cfdef3 100%);
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.schedule-container {
+    width: 100%;
+    max-width: 120000px;
+    min-width: 300px;
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+}
+
+.time-slot {
+    display: flex;
+    /* border-bottom: 1px solid #e0e0e0; */
+    /* border-top: 1px solid #e0e0e0; */
+    /* height: 48px; */
+    height: 4rem;
+
+    position: relative;
+}
+
+.time {
+    width: 50px;
+    color: #70757a;
+    font-size: 10px;
+    text-align: right;
+    padding-right: 8px;
+    padding-top: 2px;
+    flex-shrink: 0;
+
+    position: relative;
+    top: -15%;
+}
+
+.event-container {
+    flex-grow: 1;
+    position: relative;
+    border-left: 1px solid #e0e0e0;
+
+    border-top: 1px solid #e0e0e0;
+}
+
+.event {
+    background-color: #4285f4;
+    color: white;
+    padding: 4px 6px;
+    font-size: 12px;
+    border-radius: 2px;
+    /* height: 40px; */
+    height: 40%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 90vw;
 }

@@ -1,0 +1,28 @@
+<table class="schedule-container">
+    <tbody>
+
+        {% for i in range(8, 20) %}
+        {% set suffix = 'AM' %}
+        {% set hour = i %}
+        {% if i >= 12 %}
+        {% set suffix = 'PM' %}
+        {% set hour = i if i == 12 else i - 12 %}
+        {% endif %}
+        <tr class="time-slot">
+            <th class="time">{{ hour }} {{ suffix }}</th>
+            <td class="event-container">
+                {% for (id, title, duration, start) in rows %}
+                {% set start_time_parts = start.split() %}
+                {% set start_hour = start_time_parts[0].split(':')[0] %}
+                {% set start_suffix = start_time_parts[1] %}
+                {% if start_suffix == suffix and start_hour|int == hour %}
+                <div class="event">{{ title }}, {{ hour }}{{ suffix|lower }}</div>
+                {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+</table>
