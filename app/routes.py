@@ -97,6 +97,7 @@ def daily(year, month, day):
 
     if form.validate_on_submit():
         print(
+            "SUBMITTING FORM",
             {
                 "name": form.name.data,
                 "start_datetime": datetime.combine(
@@ -107,7 +108,7 @@ def daily(year, month, day):
                 ),
                 "description": form.description.data,
                 "private": form.private.data,
-            }
+            },
         )
 
         with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
@@ -154,20 +155,16 @@ def daily(year, month, day):
             )
 
             rows = curs.fetchall()
-            # rows = [
-            #     (id, title, (end - start).seconds / 60 // 15, start)
-            #     for (id, title, start, end) in rows
-            # ]
+            print('ROWS', rows)
 
             rows = [
                 (
                     id,
                     title,
                     (end - start).seconds / 60 // 15,
-                    datetime.strftime(start, "%I:%M %p").lstrip('0'),
+                    datetime.strftime(start, "%I:%M %p").lstrip("0"),
                 )
                 for (id, title, start, end) in rows
             ]
-
-            print(rows)
+            print('AFTER ROWS', rows)
             return render_template("main.html", rows=rows, form=form)

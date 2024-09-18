@@ -1,4 +1,3 @@
-{#
 <form action="" method="POST">
     {{form.csrf_token}}
     <div>
@@ -11,13 +10,6 @@
 
         {{form.start_time.label}}
         {{form.start_time(size=32)}}
-    </div>
-    <div>
-        {{form.end_date.label}}
-        {{form.end_date(size=32)}}
-
-        {{form.end_time.label}}
-        {{form.end_time(size=32)}}
     </div>
     <div>
         {{form.end_date.label}}
@@ -82,7 +74,7 @@
     </div>
 </div>
 
-
+{#
 <table>
     <thead>
         <tr>
@@ -92,6 +84,7 @@
         </tr>
     </thead>
 
+    
     <tbody>
         {% for row in rows %}
         <tr>
@@ -102,4 +95,4 @@
         {% endfor %}
     </tbody>
 </table>
-#}
+    #}

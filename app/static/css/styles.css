@@ -11,6 +11,8 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    position: relative;
 }
 
 body,
@@ -96,4 +98,16 @@ table {
     display: flex;
     align-items: center;
     width: 90vw;
+}
+
+#set-calendar {
+    background-color: red;
+    border: none;
+    padding: 2rem;
+    display: inline;
+    float: right;
+    position: fixed;
+    border-radius: 3rem;
+    right: 0.5vw;
+    bottom: 1vh;
 }
